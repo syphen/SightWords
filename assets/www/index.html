@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>SightWords</title>
+<link type="text/css" rel="stylesheet" href="default.css"/>
+<script type="text/javascript" charset="utf-8" src="jquery-plus-mobile.js"></script>
+<script type="text/javascript">$(document).bind("mobileinit", function() {$.support.cors = true;$.mobile.allowCrossDomainPages = true;});</script>
+<script type="text/javascript" charset="utf-8" src="cordova-2.1.0.js"></script>
+<script type="text/javascript" charset="utf-8">
+
+    // Wait for Cordova to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
+    window.onload = function () {
+	if(! window.device)
+		onDeviceReady();
+	}
+
+    // Cordova is ready
+    //
+    function onDeviceReady() {
+    	$('#splash').css('opacity', 1);
+    	if(window.localStorage.getItem("sight_db") == null){
+    		try {
+	    		//var db = window.openDatabase("SightWords", "1.0", "Sight Words", 100000);
+	    		var db = window.openDatabase("sight", "1.0", "Sight Words", 1000000);
+    		} catch(err){
+    			alert(err);
+    		}
+    		db.transaction(initDB, errorDB, initSuccess);
+    	}
+    	else {
+    		startUp();
+    	}
+    	/*
+    	
+		
+		*/
+    }
+    
+    function startUp(){
+    	$('#splash').css('opacity', 1)
+    	runSightWords();
+    }
+    
+    function runSightWords(){
+    	var db = window.openDatabase("sight", "1.0", "Sight Words", 1000000);
+    	db.transaction(getWord, errorDB);
+    }
+    
+    function getWord(tx){
+		tx.executeSql('SELECT * FROM words', [], processWords, errorDB);
+	}
+	
+	function processWords(tx, results){
+			var resultArray = [];
+			for(var i=0; i < results.rows.length; i+=1) {
+				resultArray.push(results.rows.item(i));
+			}
+			var randRow = resultArray.shuffle().pop();
+			var word = randRow.word;
+			$('#panel .content').html('<span class="word">'+word+'</span>');
+			if($('#splash').css('opacity') == '1'){
+				$('#splash').animate({'opacity':'0'}, 1500, function(){
+					$('#splash').css('display', 'none');
+				});
+			}
+	}
+    
+    function initDB(tx){
+    	tx.executeSql('DROP TABLE IF EXISTS words');
+    	tx.executeSql('CREATE TABLE IF NOT EXISTS words (id unique, word, audio)');
+		tx.executeSql('INSERT INTO words (id, word, audio) VALUES (1, "the", "audio/the.mp3")');
+		tx.executeSql('INSERT INTO words (id, word, audio) VALUES (2, "and", "audio/and.mp3")');
+		tx.executeSql('INSERT INTO words (id, word, audio) VALUES (3, "she", "audio/she.mp3")');
+		tx.executeSql('INSERT INTO words (id, word, audio) VALUES (4, "see", "audio/see.mp3")');
+    }
+    function errorDB(err) {
+	    alert("Error processing SQL: "+err.code);
+	}
+	
+	function initSuccess() {
+	    window.localStorage.setItem('sight_db', 'true');
+	    startUp();
+	}
+
+    // alert dialog dismissed
+    function alertDismissed() {
+        // do something
+    }
+
+    // Show a custom alert
+    //
+    function showAlert() {
+        navigator.notification.alert(
+            'You are the winner!',  // message
+            alertDismissed,         // callback
+            'Game Over',            // title
+            'Done'                  // buttonName
+        );
+    }
+
+    </script>
+</head>
+<body>
+	<div id="splash"></div>
+<div id="panel">
+	<table cellspacing="0" cellpadding="0"><tr><td class="content">
+		
+	</td></tr></table>
+</div>
+</body>
+</html>

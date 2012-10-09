@@ -1,0 +1,120 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+
+/* Sight Words Styles Start */
+* {
+	font-family: 'Arial', sans-serif !important;
+}
+body, html {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	text-align: center;
+}
+#panel, #letters, #splash {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+#splash {
+	background-color: #b0b0fc;
+	background-image: url("./logo.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	z-index: 1000;
+}
+#panel table {
+	width: 100%;
+	height: 100%;
+}
+.content {
+	vertical-align: middle;
+	text-align: center;
+	height: 100%;
+}
+.word {
+	font-size: 120px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+.letter {
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+.dimmed {
+	color: #bbbbbb;
+}
+.inuse {
+	color: #990000;
+}
+.normal {
+	color: #000000;
+}
+#sound {
+	display: none;
+}
+#letters {
+	display: none;
+	text-align: center;
+}
+#letters .letter {
+	display: inline-block;
+	width: 75px;
+	height: 60px;
+	border: 2px solid #e1e1e1;
+	margin: 2px;
+	vertical-align: middle;
+	font-size: 45px;
+	line-height: 60px;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
