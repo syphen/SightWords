@@ -34,7 +34,8 @@
         <activity
             android:name=".SightWords"
             android:label="@string/title_activity_sight_words"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale" >
+            android:configChanges="keyboardHidden|keyboard|screenSize|locale"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

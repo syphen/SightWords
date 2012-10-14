@@ -32,10 +32,6 @@
     	else {
     		startUp();
     	}
-    	/*
-    	
-		
-		*/
     }
     
     function startUp(){
@@ -61,9 +57,9 @@
 			var word = randRow.word;
 			$('#panel .content').html('<span class="word">'+word+'</span>');
 			if($('#splash').css('opacity') == '1'){
-				$('#splash').animate({'opacity':'0'}, 1500, function(){
+				setTimeout(function(){$('#splash').animate({'opacity':'0'}, 1500, function(){
 					$('#splash').css('display', 'none');
-				});
+				});}, 1000);
 			}
 	}
     
@@ -103,7 +99,7 @@
     </script>
 </head>
 <body>
-	<div id="splash"></div>
+	<div id="splash"><!-- Splash Screen --></div>
 <div id="panel">
 	<table><tr><td class="content">
 		
